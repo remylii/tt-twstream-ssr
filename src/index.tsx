@@ -6,6 +6,8 @@ import { createBrowserHistory } from 'history';
 import configureStore from './store';
 
 import App from './App';
+import Header from './components/Header';
+import Footer from './components/Footer';
 import 'reset.css';
 
 const history = createBrowserHistory();
@@ -15,7 +17,9 @@ const rootElement = document.getElementById('root');
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
+      <Header />
       <App />
+      <Footer />
     </ConnectedRouter>
   </Provider>
   , rootElement

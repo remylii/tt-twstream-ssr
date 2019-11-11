@@ -27,8 +27,17 @@ const initialState: BbsState = {
   threads: [
     {
       id: 1,
-      title: "unko",
-      comments: []
+      title: "example1",
+      comments: [
+        {
+          id: 1,
+          thread_id: 1,
+          author: "sample",
+          password: "xxx",
+          datetime: "2019-11-11 11:11:11",
+          message: "texttexttexttexttexttexttexttext"
+        }
+      ]
     },
     {
       id: 2,
@@ -42,10 +51,4 @@ export const bbsReducer = reducerWithInitialState(initialState)
   .case(bbsActions.postComment, (state, action) => {
     console.log(action);
     return state;
-  })
-  .case(bbsActions.pushById, (state, id) => {
-    return {
-      ...state,
-      byId: state.threads.find(thread => thread.id === id)
-    };
   });

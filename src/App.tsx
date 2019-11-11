@@ -1,22 +1,14 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
-import Header from './components/Header';
-import Footer from './components/Footer';
 import HomeContainer from './containers/HomeContainer';
 import BbsContainer from './containers/BbsContainer';
 
 const App: React.FC = () => (
   <div>
-    <Header />
     <Switch>
-      <Route exact path='/'>
-        <HomeContainer />
-      </Route>
-      <Route path="/thread/:id">
-        <BbsContainer />
-      </Route>
+      <Route exact path='/' component={ HomeContainer } />
+      <Route path="/thread/:id" component={ BbsContainer } />
     </Switch>
-    <Footer />
   </div>
 );
 

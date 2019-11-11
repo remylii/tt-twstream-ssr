@@ -1,12 +1,12 @@
 import React from 'react';
 import { BbsState } from '../reducers/Bbs';
-import { HomeActions } from '../containers/HomeContainer';
+import ThreadLink from './links/ThreadLink';
 
 interface OwnProps {};
-type HomeProps = OwnProps & BbsState & HomeActions;
+type HomeProps = OwnProps & BbsState;
 
 export const Home: React.FC<HomeProps> = (props: HomeProps) => {
-
+  console.log(props);
   return (
     <div>
       <p>Home</p>
@@ -15,9 +15,7 @@ export const Home: React.FC<HomeProps> = (props: HomeProps) => {
         return (
           <ul key={`thread-${thread.id}`}>
             <li>
-              <a href={`/thread/${thread.id}`} onClick={ (e) => {
-                props.pushById(thread.id);
-              } }>- {thread.title}</a>
+              <ThreadLink thread_id={thread.id}>- {thread.title}</ThreadLink>
             </li>
           </ul>
         );
