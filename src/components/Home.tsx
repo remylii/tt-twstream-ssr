@@ -6,7 +6,6 @@ interface OwnProps {};
 type HomeProps = OwnProps & BbsState;
 
 export const Home: React.FC<HomeProps> = (props: HomeProps) => {
-  console.log(props);
   return (
     <div>
       <p>Home</p>

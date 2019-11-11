@@ -7,7 +7,6 @@ type Props = {
 };
 
 const ThreadLink: React.FC<Props> = (props: Props) => {
-  console.log(props);
   return (
     <NavLink
       exact
