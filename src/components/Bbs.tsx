@@ -1,44 +1,40 @@
-import React from 'react';
-import { BbsActions } from '../containers/BbsContainer';
-import { BbsState } from '../reducers/Bbs';
+import React from "react";
+import { Thread } from "../reducers/Bbs";
+import { Comment } from "../reducers/Comment";
+import { BbsProps } from "../containers/BbsContainer";
+import PostFormContainer from "../containers/PostFormContainer";
 
-interface OwnProps {
-  id: string;
+type OwnProps = {};
+type Props = OwnProps & BbsProps;
+
+type ownState = {
+  byId: Thread | undefined;
 };
 
-type BbsProps = OwnProps & BbsState & BbsActions;
-
-export class Bbs extends React.Component<BbsProps> {
-  constructor(props: BbsProps) {
-    super(props);
-    console.log(props);
-  }
-
+export class Bbs extends React.Component<Props, ownState> {
   componentDidMount() {
-    console.log(`component did moutn thread_id string: ${this.props.id}`);
+    // console.log(`component did moutn thread_id string: ${this.props.id}`);
   }
 
   render() {
-    const thread_id = parseInt(this.props.id, 10);
-    const thread = this.props.threads.find(thread => thread.id === thread_id);
-    if (!thread) {
-      return <div>No Thread</div>
+    if (!this.props.thread) {
+      return <div>No thread.</div>;
     }
 
     return (
       <div>
         <p>Bbs components</p>
-        <p>title: {thread.title}</p>
-        { thread.comments.map(comment => {
-          return (
+        {this.props.comments.length > 0 ? (
+          this.props.comments.map((comment: Comment) => (
             <div key={`thread-comment-${comment.id}`}>
-              <p>ID: {comment.id}</p>
-              <p>author: {comment.author}</p>
-              <p>datetime: {comment.datetime}</p>
-              <p>{comment.message}</p>
+              <p>comment</p>
+              <p>{comment.author}</p>
             </div>
-          );
-        }) }
+          ))
+        ) : (
+          <div>no comments</div>
+        )}
+        <PostFormContainer thread_id={this.props.thread.id} />
       </div>
     );
   }
