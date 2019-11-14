@@ -1,12 +1,12 @@
 import React from "react";
-import {
-  PostFormActions,
-  PostFormProps
-} from "../containers/PostFormContainer";
 import { PostComment } from "../reducers/Comment";
+import { PostFormActions } from "../containers/BbsContainer";
 
-type ownProps = {};
-type Props = ownProps & PostFormProps & PostFormActions;
+type ownProps = {
+  thread_id: number;
+};
+
+type Props = ownProps & PostFormActions;
 
 interface State {
   author: string;
@@ -40,7 +40,7 @@ class PostForm extends React.Component<Props, State> {
       ":" +
       d.getSeconds();
 
-    const post_comment: PostComment = {
+    const payload: PostComment = {
       thread_id: this.props.thread_id,
       author: this.state.author,
       password: this.state.password,
@@ -48,7 +48,7 @@ class PostForm extends React.Component<Props, State> {
       datetime: datestr
     };
 
-    this.props.postComment(post_comment);
+    this.props.postComment(payload);
   }
 
   updateAuthor(v: string) {

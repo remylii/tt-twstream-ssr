@@ -1,17 +1,21 @@
 import React from "react";
 import { Thread } from "../reducers/Bbs";
 import { Comment } from "../reducers/Comment";
-import { BbsProps } from "../containers/BbsContainer";
-import PostFormContainer from "../containers/PostFormContainer";
+import { BbsProps, PostFormActions } from "../containers/BbsContainer";
+import PostForm from "../components/PostForm";
 
 type OwnProps = {};
-type Props = OwnProps & BbsProps;
+type Props = OwnProps & BbsProps & PostFormActions;
 
 type ownState = {
   byId: Thread | undefined;
 };
 
 export class Bbs extends React.Component<Props, ownState> {
+  constructor(props: Props) {
+    super(props);
+    console.log(props);
+  }
   componentDidMount() {
     // console.log(`component did moutn thread_id string: ${this.props.id}`);
   }
@@ -34,7 +38,10 @@ export class Bbs extends React.Component<Props, ownState> {
         ) : (
           <div>no comments</div>
         )}
-        <PostFormContainer thread_id={this.props.thread.id} />
+        <PostForm
+          thread_id={this.props.thread.id}
+          postComment={this.props.postComment}
+        />
       </div>
     );
   }

@@ -1,9 +1,12 @@
+import { Action } from "typescript-fsa";
+import { Dispatch } from "redux";
 import { connect } from "react-redux";
 import { AppState } from "../store";
-import { Bbs } from "../components/Bbs";
-import { RouteComponentProps } from "react-router";
 import { Thread } from "../reducers/Bbs";
-import { Comment } from "../reducers/Comment";
+import { Comment, PostComment } from "../reducers/Comment";
+import { RouteComponentProps } from "react-router";
+import { commentActions } from "../actions/CommentAction";
+import { Bbs } from "../components/Bbs";
 
 export type BbsProps = {
   thread: Thread | undefined;
@@ -23,4 +26,17 @@ function mapStateToProps(appState: AppState, props: BbsProps) {
   return Object.assign({}, { thread, comments, id });
 }
 
-export default connect(mapStateToProps)(Bbs);
+export interface PostFormActions {
+  postComment: (v: PostComment) => Action<PostComment>;
+}
+
+function mapDispatchToProps(dispatch: Dispatch<Action<PostComment>>) {
+  return {
+    postComment: (v: PostComment) => dispatch(commentActions.postComment(v))
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Bbs);
