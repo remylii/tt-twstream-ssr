@@ -11,6 +11,15 @@ export type AppState = {
   comments: CommentState;
 };
 
+interface ExtendedWindow extends Window {
+  __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+}
+declare var window: ExtendedWindow;
+
+const composeReduxDevToolsEnhancers =
+  (typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+  compose;
+
 const configureStore = (history: History) => {
   const rootReducer = combineReducers<AppState>({
     router: connectRouter(history),
@@ -19,7 +28,8 @@ const configureStore = (history: History) => {
   });
   const store = createStore(
     rootReducer,
-    compose(applyMiddleware(routerMiddleware(history)))
+    // compose(applyMiddleware(routerMiddleware(history)))
+    composeReduxDevToolsEnhancers(applyMiddleware(routerMiddleware(history)))
   );
 
   return store;

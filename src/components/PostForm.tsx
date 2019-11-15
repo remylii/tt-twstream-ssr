@@ -49,6 +49,12 @@ class PostForm extends React.Component<Props, State> {
     };
 
     this.props.postComment(payload);
+
+    this.setState({
+      author: "",
+      password: "",
+      message: ""
+    });
   }
 
   updateAuthor(v: string) {

@@ -37,8 +37,18 @@ const intialState: CommentState = {
 export const commentReducer = reducerWithInitialState(intialState).case(
   commentActions.postComment,
   (state: CommentState, action: PostComment) => {
-    console.log("action.postComment");
-    console.log(action);
-    return state;
+    const comments = state.byId.hasOwnProperty(action.thread_id)
+      ? state.byId[action.thread_id]
+      : [];
+    const id = comments.length > 0 ? comments[comments.length - 1].id + 1 : 1;
+    const byId = {
+      ...state.byId,
+      [action.thread_id]: comments.concat({ ...action, id })
+    };
+
+    return {
+      ...state,
+      byId
+    };
   }
 );

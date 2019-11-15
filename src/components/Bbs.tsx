@@ -1,5 +1,4 @@
 import React from "react";
-import { Thread } from "../reducers/Bbs";
 import { Comment } from "../reducers/Comment";
 import { BbsProps, PostFormActions } from "../containers/BbsContainer";
 import PostForm from "../components/PostForm";
@@ -7,15 +6,7 @@ import PostForm from "../components/PostForm";
 type OwnProps = {};
 type Props = OwnProps & BbsProps & PostFormActions;
 
-type ownState = {
-  byId: Thread | undefined;
-};
-
-export class Bbs extends React.Component<Props, ownState> {
-  constructor(props: Props) {
-    super(props);
-    console.log(props);
-  }
+export class Bbs extends React.Component<Props> {
   componentDidMount() {
     // console.log(`component did moutn thread_id string: ${this.props.id}`);
   }
@@ -31,7 +22,7 @@ export class Bbs extends React.Component<Props, ownState> {
         {this.props.comments.length > 0 ? (
           this.props.comments.map((comment: Comment) => (
             <div key={`thread-comment-${comment.id}`}>
-              <p>comment</p>
+              <p>CommentID: {comment.id}</p>
               <p>{comment.author}</p>
             </div>
           ))
