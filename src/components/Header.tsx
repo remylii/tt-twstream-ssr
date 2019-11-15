@@ -16,7 +16,13 @@ const Box = styled.header<PaletteProps & SpacingProps & TypographyProps>`
 `;
 
 const Header: React.FC = () => (
-  <Box color="white" bgcolor="palevioletred" p={1} fontSize="18px">
+  <Box
+    className="header"
+    color="white"
+    bgcolor="palevioletred"
+    p={1}
+    fontSize="18px"
+  >
     Header Components
   </Box>
 );

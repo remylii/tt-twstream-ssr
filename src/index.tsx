@@ -9,11 +9,23 @@ import App from "./App";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import "reset.css";
-
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "./theme";
-import Container from "@material-ui/core/Container";
+import styled, { ThemeProvider } from "styled-components";
+import {
+  palette,
+  PaletteProps,
+  spacing,
+  SpacingProps,
+  typography,
+  TypographyProps
+} from "@material-ui/system";
+
+const Box = styled.div<PaletteProps & SpacingProps & TypographyProps>`
+  ${palette}
+  ${spacing}
+  ${typography}
+`;
 
 const history = createBrowserHistory();
 const store = configureStore(history);
@@ -24,11 +36,15 @@ ReactDOM.render(
     <ConnectedRouter history={history}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Container maxWidth="md">
+        <Box
+          color="primary.main"
+          bgcolor="background.paper"
+          fontFamily="h6.fontFamily"
+        >
           <Header />
           <App />
           <Footer />
-        </Container>
+        </Box>
       </ThemeProvider>
     </ConnectedRouter>
   </Provider>,
