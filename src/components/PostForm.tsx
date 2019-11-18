@@ -1,6 +1,21 @@
 import React from "react";
 import { PostComment } from "../reducers/Comment";
 import { PostFormActions } from "../containers/BbsContainer";
+import styled from "styled-components";
+import {
+  palette,
+  PaletteProps,
+  spacing,
+  SpacingProps
+} from "@material-ui/system";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import SubTitle from "./titles/SubTitle";
+
+const Box = styled.div<PaletteProps & SpacingProps>`
+  ${palette}
+  ${spacing}
+`;
 
 type ownProps = {
   thread_id: number;
@@ -77,33 +92,50 @@ class PostForm extends React.Component<Props, State> {
 
   render() {
     return (
-      <div>
-        <input
-          type="text"
-          name="comment-author"
-          value={this.state.author}
-          onChange={e => this.updateAuthor(e.target.value)}
-        />
-        <input
-          type="password"
-          name="comment-password"
-          value={this.state.password}
-          onChange={e => this.updatePassword(e.target.value)}
-        />
-        <textarea
-          name="comment-message"
-          rows={5}
-          value={this.state.message}
-          onChange={e => this.updateMessage(e.target.value)}
-        />
-        <button
-          onClick={() => {
-            this.handleForm();
-          }}
-        >
-          Btn
-        </button>
-      </div>
+      <Box>
+        <SubTitle title="投稿フォーム" />
+        <Box>
+          <TextField
+            required
+            label="名前"
+            fullWidth
+            margin="normal"
+            value={this.state.author}
+            onChange={e => this.updateAuthor(e.target.value)}
+          />
+        </Box>
+        <div>
+          <TextField
+            required
+            label="パスワード"
+            type="password"
+            fullWidth
+            margin="normal"
+            value={this.state.password}
+            onChange={e => this.updatePassword(e.target.value)}
+          />
+        </div>
+        <div>
+          <TextField
+            label="本文"
+            multiline
+            rows="3"
+            margin="normal"
+            fullWidth
+            value={this.state.message}
+            onChange={e => this.updateMessage(e.target.value)}
+          />
+        </div>
+        <div>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => this.handleForm()}
+          >
+            投稿する
+          </Button>
+        </div>
+      </Box>
     );
   }
 }

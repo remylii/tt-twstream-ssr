@@ -19,7 +19,7 @@ const Footer: React.FC = () => (
     <Typography variant="h6" component="p" gutterBottom>
       footer
     </Typography>
-    <Link href="/">Home</Link>,
+    <Link href="/">Home</Link>&emsp;/&emsp;
     <Link href="https://google.com/" target="_blank" rel="noopener noreferrer">
       Google
     </Link>

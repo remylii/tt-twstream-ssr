@@ -2,9 +2,21 @@ import React from "react";
 import { Comment } from "../reducers/Comment";
 import { BbsProps, PostFormActions } from "../containers/BbsContainer";
 import PostForm from "../components/PostForm";
+import SubTitle from "./titles/SubTitle";
+import styled from "styled-components";
+import { spacing, SpacingProps } from "@material-ui/system";
+import CommentBox from "./CommentBox";
 
 type OwnProps = {};
 type Props = OwnProps & BbsProps & PostFormActions;
+
+const Box = styled.div<SpacingProps>`
+  ${spacing}
+`;
+
+const Section = styled.section<SpacingProps>`
+  ${spacing}
+`;
 
 export class Bbs extends React.Component<Props> {
   componentDidMount() {
@@ -17,23 +29,27 @@ export class Bbs extends React.Component<Props> {
     }
 
     return (
-      <div>
-        <p>Bbs components</p>
-        {this.props.comments.length > 0 ? (
-          this.props.comments.map((comment: Comment) => (
-            <div key={`thread-comment-${comment.id}`}>
-              <p>CommentID: {comment.id}</p>
-              <p>{comment.author}</p>
-            </div>
-          ))
-        ) : (
-          <div>no comments</div>
-        )}
+      <Box mb={2}>
+        <Section mb={5}>
+          <SubTitle title="投稿一覧" />
+          {this.props.comments.length > 0 ? (
+            this.props.comments.map((comment: Comment) => (
+              <CommentBox
+                key={`thread-comment-${comment.id}`}
+                author={comment.author}
+                datetime={comment.datetime}
+                message={comment.message}
+              />
+            ))
+          ) : (
+            <div>no comments</div>
+          )}
+        </Section>
         <PostForm
           thread_id={this.props.thread.id}
           postComment={this.props.postComment}
         />
-      </div>
+      </Box>
     );
   }
 }
