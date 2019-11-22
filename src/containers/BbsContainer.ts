@@ -28,15 +28,16 @@ function mapStateToProps(appState: AppState, props: BbsProps) {
 
 export interface PostFormActions {
   postComment: (v: PostComment) => Action<PostComment>;
+  fetchComment: () => Action<Comment[]>;
 }
 
-function mapDispatchToProps(dispatch: Dispatch<Action<PostComment>>) {
+function mapDispatchToProps(
+  dispatch: Dispatch<Action<PostComment | Comment[]>>
+) {
   return {
-    postComment: (v: PostComment) => dispatch(commentActions.postComment(v))
+    postComment: (v: PostComment) => dispatch(commentActions.postComment(v)),
+    fetchComment: () => dispatch(commentActions.fetchComment([]))
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Bbs);
+export default connect(mapStateToProps, mapDispatchToProps)(Bbs);

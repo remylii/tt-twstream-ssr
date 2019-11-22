@@ -5,9 +5,24 @@ const port = process.env.PORT || 10080;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+// CORS
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 
+app.get("/thread", (req, res, next) => {
+  setTimeout(() => {
+    next();
+  }, 3000);
+});
 app.get("/thread", (req, res) => {
   console.log("access: `/thread`");
+
   res.status(200).send({
     thread: {
       id: 1,

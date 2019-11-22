@@ -20,6 +20,14 @@ const Section = styled.section<SpacingProps>`
 
 export class Bbs extends React.Component<Props> {
   componentDidMount() {
+    this.props.fetchComment();
+    // fetch(`http://localhost:10080/thread`)
+    //   .then(res => {
+    //     return res.json();
+    //   })
+    //   .then(json => {
+    //     console.log(json);
+    //   });
     // console.log(`component did moutn thread_id string: ${this.props.id}`);
   }
 
@@ -48,6 +56,7 @@ export class Bbs extends React.Component<Props> {
         <PostForm
           thread_id={this.props.thread.id}
           postComment={this.props.postComment}
+          fetchComment={this.props.fetchComment}
         />
       </Box>
     );

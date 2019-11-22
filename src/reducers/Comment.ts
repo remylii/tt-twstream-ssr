@@ -34,21 +34,31 @@ const intialState: CommentState = {
   }
 };
 
-export const commentReducer = reducerWithInitialState(intialState).case(
-  commentActions.postComment,
-  (state: CommentState, action: PostComment) => {
-    const comments = state.byId.hasOwnProperty(action.thread_id)
-      ? state.byId[action.thread_id]
-      : [];
-    const id = comments.length > 0 ? comments[comments.length - 1].id + 1 : 1;
-    const byId = {
-      ...state.byId,
-      [action.thread_id]: comments.concat({ ...action, id })
-    };
+export const commentReducer = reducerWithInitialState(intialState)
+  .case(
+    commentActions.postComment,
+    (state: CommentState, action: PostComment) => {
+      const comments = state.byId.hasOwnProperty(action.thread_id)
+        ? state.byId[action.thread_id]
+        : [];
+      const id = comments.length > 0 ? comments[comments.length - 1].id + 1 : 1;
+      const byId = {
+        ...state.byId,
+        [action.thread_id]: comments.concat({ ...action, id })
+      };
 
-    return {
-      ...state,
-      byId
-    };
-  }
-);
+      return {
+        ...state,
+        byId
+      };
+    }
+  )
+  .case(
+    commentActions.fetchComment,
+    (state: CommentState, action: Comment[]) => {
+      console.log("comment action fetchComment reducer");
+      return {
+        ...state
+      };
+    }
+  );
