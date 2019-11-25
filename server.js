@@ -42,6 +42,25 @@ app.get("/thread", (req, res) => {
   });
 });
 
+app.get("/bbs", (req, res) => {
+  console.log("access /bbs");
+
+  res.status(200).send({
+    threads: [
+      {
+        id: 1,
+        title: "thread 1",
+        comment_count: 2
+      },
+      {
+        id: 2,
+        title: "example 2",
+        comment_count: 0
+      }
+    ]
+  });
+});
+
 app.listen(port, () => {
   console.log("listen on port " + port);
 });

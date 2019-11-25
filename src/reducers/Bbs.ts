@@ -1,4 +1,5 @@
 import { reducerWithInitialState } from "typescript-fsa-reducers";
+import { threadActions } from "../actions/ThreadAction";
 
 export interface BbsState {
   threads: Thread[];
@@ -27,4 +28,13 @@ const initialState: BbsState = {
   ]
 };
 
-export const bbsReducer = reducerWithInitialState(initialState);
+export const bbsReducer = reducerWithInitialState(initialState).case(
+  threadActions.fetchThread,
+  (state: BbsState, action: Thread[]) => {
+    console.log("fetch thread action");
+
+    return {
+      ...state
+    };
+  }
+);

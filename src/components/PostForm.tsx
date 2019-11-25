@@ -1,6 +1,6 @@
 import React from "react";
 import { PostComment } from "../reducers/Comment";
-import { PostFormActions } from "../containers/BbsContainer";
+import { DispatchProps } from "../containers/BbsContainer";
 import styled from "styled-components";
 import {
   palette,
@@ -21,7 +21,7 @@ type ownProps = {
   thread_id: number;
 };
 
-type Props = ownProps & PostFormActions;
+type Props = ownProps & DispatchProps;
 
 interface State {
   author: string;

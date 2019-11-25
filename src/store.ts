@@ -1,7 +1,7 @@
 import { routerMiddleware, connectRouter } from "connected-react-router";
 import { applyMiddleware, compose, createStore, combineReducers } from "redux";
 import { History } from "history";
-// import createSagaMiddleware from 'redux-saga';
+import createSagaMiddleware from "redux-saga";
 import { bbsReducer, BbsState } from "./reducers/Bbs";
 import { commentReducer, CommentState } from "./reducers/Comment";
 

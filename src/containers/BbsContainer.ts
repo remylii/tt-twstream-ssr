@@ -26,11 +26,6 @@ function mapStateToProps(appState: AppState, props: BbsProps) {
   return Object.assign({}, { thread, comments, id });
 }
 
-export interface PostFormActions {
-  postComment: (v: PostComment) => Action<PostComment>;
-  fetchComment: () => Action<Comment[]>;
-}
-
 function mapDispatchToProps(
   dispatch: Dispatch<Action<PostComment | Comment[]>>
 ) {
@@ -39,5 +34,7 @@ function mapDispatchToProps(
     fetchComment: () => dispatch(commentActions.fetchComment([]))
   };
 }
+
+export type DispatchProps = ReturnType<typeof mapDispatchToProps>;
 
 export default connect(mapStateToProps, mapDispatchToProps)(Bbs);

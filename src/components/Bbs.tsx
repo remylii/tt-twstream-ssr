@@ -1,6 +1,6 @@
 import React from "react";
 import { Comment } from "../reducers/Comment";
-import { BbsProps, PostFormActions } from "../containers/BbsContainer";
+import { BbsProps, DispatchProps } from "../containers/BbsContainer";
 import PostForm from "../components/PostForm";
 import SubTitle from "./titles/SubTitle";
 import styled from "styled-components";
@@ -8,7 +8,7 @@ import { spacing, SpacingProps } from "@material-ui/system";
 import CommentBox from "./CommentBox";
 
 type OwnProps = {};
-type Props = OwnProps & BbsProps & PostFormActions;
+type Props = OwnProps & BbsProps & DispatchProps;
 
 const Box = styled.div<SpacingProps>`
   ${spacing}

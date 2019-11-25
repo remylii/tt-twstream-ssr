@@ -1,5 +1,5 @@
 import React from "react";
-import { BbsState } from "../reducers/Bbs";
+import { HomeProps, DispatchProps } from "../containers/HomeContainer";
 import styled from "styled-components";
 import { spacing, SpacingProps } from "@material-ui/system";
 import List from "@material-ui/core/List";
@@ -14,9 +14,11 @@ const Box = styled.div<SpacingProps>`
 `;
 
 interface OwnProps {}
-type HomeProps = OwnProps & BbsState;
+type Props = OwnProps & HomeProps & DispatchProps;
 
-export const Home: React.FC<HomeProps> = (props: HomeProps) => {
+export const Home: React.FC<Props> = (props: Props) => {
+  props.fetchThread();
+
   return (
     <Box mb={1}>
       <SubTitle title="スレッド一覧" />
